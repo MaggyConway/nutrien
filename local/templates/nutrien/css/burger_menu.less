@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico|Open+Sans:300');
+@hamburger-menu-size: 60px;
+@hamburger-menu-border-radius: .12em;
+// @hamburger-menu-bg-color: fade(#2196F3,
+//   75%);
+@hamburger-menu-line-height: 2px;
+@hover-line-height: @hamburger-menu-line-height;
+@hover-color: darken(@main-color,
+  10%);
+@content-bg-color: fade(#9233ce,
+  97%);
+@main-color: #525252;
+@anim-duration: .4s;
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// a,
+// a:visited,
+// a:hover,
+// a:active {
+//   color: inherit;
+//   text-decoration: none;
+// }
+
+
+.outer-burger-menu {
+    display: none;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    z-index: 1;
+    top: 15px;
+    right: 15px;
+    background: white;
+    border-radius: 50px;
+
+  .checkbox-toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    cursor: pointer;
+    width: 100%;
+    height: @hamburger-menu-size;
+    opacity: 0;
+
+    &:checked {
+      & + .hamburger {
+        > div {
+            transform: rotate(135deg);
+            background: #FFF;
+
+          &:before,
+          &:after {
+            top: 0;
+            transform: rotate(90deg);
+            background: #FFF;
+            }
+
+            &:after {
+                opacity: 0;
+            }
+        }
+      }
+
+        & ~ .burger-menu  {
+           pointer-events: auto;
+           visibility: visible;
+
+           > div {
+             transform: scale(1);
+             transition-duration: .75s;
+
+                 > div {
+                   opacity: 1;
+                   transition: opacity @anim-duration ease @anim-duration;
+                 }
+              }
+         }
+        & ~ .burger-title {
+            color: #FFF;
+            z-index: 1;
+        }
+    }
+
+// &:hover + .hamburger {
+//    box-shadow: inset 0 0 10px rgba(0, 0, 0, .1);
+// }
+
+&:checked:hover + .hamburger > div {
+   transform: rotate(225deg);
+}
+}
+
+.hamburger {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: 1;
+    width: @hamburger-menu-size;
+    height: 50px;
+    padding: .5em 1em;
+    border-radius: 0 @hamburger-menu-border-radius @hamburger-menu-border-radius 0;
+    cursor: pointer;
+    transition: box-shadow @anim-duration ease;
+    backface-visibility: hidden;
+    display: none;
+ 
+ > div {
+   position: relative;
+   flex: none;
+   width: 100%;
+   height: @hamburger-menu-line-height;
+   background: @main-color;
+   transition: all @anim-duration ease;
+   .flex-center;
+
+   &:before,
+   &:after {
+     content: '';
+     position: absolute;
+     z-index: 1;
+     top: -@hamburger-menu-size / 6;
+     left: 0;
+     width: 100%;
+     height: @hamburger-menu-line-height;
+     background: @main-color;
+     transition: all @anim-duration ease;
+ }
+
+ &:after {
+     top: @hamburger-menu-size / 6;
+ }
+}
+}
+.burger-menu {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ pointer-events: none;
+ visibility: hidden;
+ overflow: hidden;
+ backface-visibility: hidden;
+ outline: 1px solid transparent;
+ .flex-center;
+
+ > div {
+   width: 200vw;
+   height: 200vw;
+   color: @main-color;
+   background: @content-bg-color;
+   border-radius: 50%;
+   transition: all @anim-duration ease;
+   flex: none;
+   transform: scale(0);
+   backface-visibility: hidden;
+   overflow: hidden;
+   .flex-center;
+
+   > div {
+     text-align: center;
+     max-width: 90vw;
+     max-height: 100vh;
+     opacity: 0;
+     transition: opacity @anim-duration ease;
+     overflow-y: auto;
+     flex: none;
+     .flex-center;
+
+     > ul {
+       list-style: none;
+       padding: 0 1em;
+       margin: 0;
+       display: block;
+       max-height: 100vh;
+
+       > li {
+         padding: 0;
+         margin: 1em;
+         font-size: 24px;
+         display: block;
+
+         > a {
+           position: relative;
+           display: inline;
+           cursor: pointer;
+           transition: color @anim-duration ease;
+
+           &:hover {
+             color: @hover-color;
+
+             &:after {
+               width: 100%;
+           }
+       }
+
+       &:after {
+          content: '';
+          position: absolute;
+          z-index: 1;
+          bottom: -.15em;
+          left: 0;
+          width: 0;
+          height: @hover-line-height;
+          background: @hover-color;
+          transition: width @anim-duration ease;
+      }
+  }
+}
+}
+}
+}
+}
+}
+
+.small_menu {
+    display: none;
+    .header__menu {
+        //margin-top: 90px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        .header__menu__item {
+            a {
+                color: #FFF;
+            }
+            &:after {
+                background: url(/local/templates/nutrien/images/wh-arrow-small-menu.svg) no-repeat center center;
+            }
+        }
+    }
+}
+@media screen and (max-width: 600px) {
+    .outer-burger-menu .hamburger {
+        .flex-center;
+    }
+    .big_menu {
+        display: none;
+    }
+    .small_menu {
+        display: block;
+    }
+    .outer-burger-menu {
+        display: block;
+    }
+}
